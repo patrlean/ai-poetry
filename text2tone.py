@@ -26,7 +26,7 @@ def Pinyin2tone(text):
             linetone.append(2)
         elif str == 'ǔ' or str == 'ǎ' or str == 'ǒ' or str == 'ě' or str == 'ǐ' or str == 'ǚ':
             linetone.append(3)
-        elif str == 'è' or str == 'ì'  or str == 'à' or str == 'ù' or str == 'ò':
+        elif str == 'è' or str == 'ì'  or str == 'à' or str == 'ù' or str == 'ò' or str =='ǜ' or str == 'À':
             linetone.append(4)
     return linetone
 
@@ -53,3 +53,24 @@ def ToneDivideWithLabel(tones):
             if num_label == 5:
                 num_label = 1
     return np.array(tag) , np.array(labels)
+
+def TextDivideWithFiveWords(filename):
+    with open(filename, "r", encoding='UTF-8') as f:
+        simple_texts = []
+        count = 1
+        for text in f.read():
+            if '\u4e00' <= text  <= '\u9fa5':
+                count += 1
+                if count == 6:
+                    simple_texts.append(text)
+                    count = 1
+        
+    return simple_texts
+        
+    
+    
+    
+    
+    
+    
+    
